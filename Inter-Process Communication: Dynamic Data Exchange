@@ -1,0 +1,4 @@
+metadata.event_type = "PROCESS_LAUNCH"
+re.regex(principal.process.file.full_path, `eqnedt32\.exe$`) nocase
+re.regex(target.process.command_line, `powershell|cmd\.exe`) nocase
+re.regex(target.process.command_line, `downloadstring|webclient`) nocase
