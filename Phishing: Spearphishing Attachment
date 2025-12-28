@@ -1,0 +1,13 @@
+(
+  (
+    // Office/Word Apps launching suspicious child processes
+    principal.process.file.full_path = /winword\.exe|excel\.exe/ nocase and
+    target.process.file.full_path = /cmd\.exe|powershell\.exe|wscript\.exe|cscript\.exe|mshta\.exe|wmiprvse\.exe/ nocase
+  )
+  or
+  (
+    // Looking specifically for the file opening event of RTF or Excel files
+    target.process.command_line = /.*\.rtf|.*\.xls|.*\.xlsx|.*\.xlsm/ nocase and
+    (target.process.command_line = /http/ nocase or target.process.command_line = /script/ nocase)
+  )
+)
