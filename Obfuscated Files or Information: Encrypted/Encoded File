@@ -1,0 +1,14 @@
+(
+  // 1. Detect the SFX execution via process metadata or file name
+  (
+    target.process.file.full_path = /.*\.sfx\.exe$/ nocase or
+    target.process.command_line = / -s / nocase // Common flag for silent extraction
+  )
+  or
+  // 2. Detect WinRAR/SFX extracting and immediately launching a sub-process
+  (
+    principal.process.file.full_path = /.*\.exe/ nocase and
+    principal.process.file.company_name = /WinRAR/ nocase and
+    target.process.file.full_path = /AppData\\Local\\Temp/ nocase
+  )
+)
